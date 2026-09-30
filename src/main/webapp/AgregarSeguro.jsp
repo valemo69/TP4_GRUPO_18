@@ -20,14 +20,14 @@
     <form action="SeguroServlet" method="post">
 
         <table>
-
+			<!--
             <tr>
                 <td>Id Seguro:</td>
                 <td>
                     <input type="text" name="idSeguro">
                 </td>
             </tr>
-
+			-->
             <tr>
                 <td>Descripción:</td>
                 <td>
@@ -40,7 +40,8 @@
                 <td>
                     <select name="idTipo">
                         <option value="1">Seguro de casas</option>
-                        <option value="2">Seguro de motos</option>
+                        <option value="2">Seguro de vida</option>
+                        <option value="3">Seguro de motos</option>
                     </select>
                 </td>
             </tr>

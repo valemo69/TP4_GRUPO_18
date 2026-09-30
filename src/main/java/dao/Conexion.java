@@ -19,7 +19,7 @@ public class Conexion {
             // Este es el driver exacto para tu versión 5.1.47
             Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(host + bd, user, pass);
-            this.connection.setAutoCommit(false);
+            //this.connection.setAutoCommit(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
