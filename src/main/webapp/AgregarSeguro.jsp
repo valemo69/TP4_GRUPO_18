@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, Dominio.TipoSeguro" %>
+<%
+    ArrayList<TipoSeguro> tipos = (ArrayList<TipoSeguro>) request.getAttribute("tipos");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@
 
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
-        <a class="nav-item" href="AgregarSeguro.jsp">Agregar Seguros</a>
+        <a class="nav-item" href="SeguroServlet">Agregar Seguros</a>
         <a class="nav-item" href="ListarSeguros.jsp">Listar Seguros</a>
     </div>
 
@@ -23,14 +27,13 @@
     <form action="SeguroServlet" method="post">
 
         <table>
-			<!--
             <tr>
                 <td>Id Seguro:</td>
                 <td>
-                    <input type="text" name="idSeguro">
+                    <input type="text" name="idSeguro" value="${proximoId}" readonly>
                 </td>
             </tr>
-			-->
+
             <tr>
                 <td>Descripción:</td>
                 <td>
@@ -42,9 +45,11 @@
                 <td>Tipo de Seguro:</td>
                 <td>
                     <select name="idTipo">
-                        <option value="1">Seguro de casas</option>
-                        <option value="2">Seguro de vida</option>
-                        <option value="3">Seguro de motos</option>
+                        <% if (tipos != null) {
+                               for (TipoSeguro t : tipos) { %>
+                            <option value="<%= t.getIdTipo() %>"><%= t.getDescripcion() %></option>
+                        <%     }
+                           } %>
                     </select>
                 </td>
             </tr>

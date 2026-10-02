@@ -1,8 +1,11 @@
 package dao;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import Dominio.Seguro;
+import Dominio.TipoSeguro;
 
 
 public class SeguroDao {
@@ -36,6 +39,40 @@ public class SeguroDao {
         }
         return filas;
     }
+	
+	public int obtenerProximoId() {
+	    int proximoId = 1;
+	    try {
+	        Connection cn = Conexion.getConexion().getSQLConexion();
+	        Statement st = cn.createStatement();
+	        ResultSet rs = st.executeQuery("SELECT MAX(idSeguro) FROM seguros");
+	        if (rs.next()) {
+	            proximoId = rs.getInt(1) + 1;   // si la  tabla vacía getInt devuelve 0 así que da 1
+	        }
+	        rs.close();
+	        st.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return proximoId;
+	}
+
+	public ArrayList<TipoSeguro> obtenerTipos() {
+	    ArrayList<TipoSeguro> lista = new ArrayList<>();
+	    try {
+	        Connection cn = Conexion.getConexion().getSQLConexion();
+	        Statement st = cn.createStatement();
+	        ResultSet rs = st.executeQuery("SELECT idTipo, descripcion FROM tiposeguros");
+	        while (rs.next()) {
+	            lista.add(new TipoSeguro(rs.getInt("idTipo"), rs.getString("descripcion")));
+	        }
+	        rs.close();
+	        st.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return lista;
+	}
 }
 	
 	
