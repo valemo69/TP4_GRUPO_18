@@ -20,6 +20,22 @@
         <a class="nav-item" href="ListarSeguros.jsp">Listar Seguros</a>
     </div>
 
+	<h2>"Tipo de seguros en la base de datos"</h2>
+
+	<br>
+	
+	<form action="SeguroServlet" method="get">
+	    Busqueda por tipo de seguros:
+	
+	    <select name="idTipo">
+	        <option value="1">Seguro de casas</option>
+	        <option value="2">Seguro de vida</option>
+	        <option value="3">Seguro de motos</option>
+	    </select>
+	
+	    <input type="submit" value="Filtrar">
+	</form>
+	
     <table>
         <thead>
             <tr>
