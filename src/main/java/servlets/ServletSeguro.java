@@ -22,8 +22,10 @@ public class ServletSeguro extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Redirigimos directamente al formulario de alta de seguros para evitar desajustes de nombres en el DAO
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarSeguro.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
