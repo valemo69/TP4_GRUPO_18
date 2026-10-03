@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Agregar usuario</title>
+<title>Agregar Seguros</title>
 <style>
     .nav-item {margin-right: 10px}
 </style>
