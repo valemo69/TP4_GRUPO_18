@@ -18,21 +18,16 @@
 
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
-        <a class="nav-item" href="SeguroServlet">Agregar Seguros</a>
+        <a class="nav-item" href="ServletSeguro">Agregar Seguros</a>
         <a class="nav-item" href="ListarSeguros.jsp">Listar Seguros</a>
     </div>
 
     <h1>Agregar Seguros</h1>
 
-    <form action="SeguroServlet" method="post">
+    <form action="ServletSeguro" method="post">
 
         <table>
-            <tr>
-                <td>Id Seguro:</td>
-                <td>
-                    <input type="text" name="idSeguro" value="${proximoId}" readonly>
-                </td>
-            </tr>
+            
 
             <tr>
                 <td>Descripción:</td>
@@ -71,7 +66,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" value="Aceptar">
+                    <input type="submit" name="btnAceptar" value="Aceptar">
                 </td>
             </tr>
 
