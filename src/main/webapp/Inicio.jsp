@@ -16,8 +16,8 @@
     <!-- Menú superior de navegación general -->
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
-        <a class="nav-item" href="ServletSeguro">Agregar Seguros</a>
-        <a class="nav-item" href="ListarSeguros.jsp">Listar Seguros</a>
+        <a class="nav-item" href="AgregarSeguro.jsp">Agregar Seguros</a>
+        <a class="nav-item" href="ServletSeguro?accion=listar">Listar Seguros</a>
     </div>
 
     <hr style="border: 0; border-top: 1px solid #6aa0d8; margin: 15px 0;">

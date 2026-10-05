@@ -1,17 +1,18 @@
 package servlets;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+// Importamos tus clases para poder usarlas acá adentro
+import Dominio.Seguro;
+import dao.SeguroDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-// Importamos tus clases para poder usarlas acá adentro
-import Dominio.Seguro; 
-import dao.SeguroDao;
 
 // Esta ruta DEBE coincidir con el action del formulario en el JSP
 @WebServlet("/ServletSeguro")
@@ -23,13 +24,23 @@ public class ServletSeguro extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Redirigimos directamente al formulario de alta de seguros para evitar desajustes de nombres en el DAO
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarSeguro.jsp");
-		dispatcher.forward(request, response);
-	}
+        String accion = request.getParameter("accion");
+        
+        if ("listar".equals(accion)) {
+            SeguroDao dao = new SeguroDao();
+            ArrayList<Seguro> lista = dao.obtenerSeguros();
+            request.setAttribute("listaSeguros", lista);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/ListarSeguros.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            // Comportamiento por defecto: ir a Agregar Seguros
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarSeguro.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		// 1. CAPTURAR EL BOTÓN ACEPTAR
 		// Preguntamos si el usuario hizo clic en el botón que tiene name="btnAceptar"
 		if (request.getParameter("btnAceptar") != null) {

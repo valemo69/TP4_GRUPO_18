@@ -1,3 +1,5 @@
+<%@page import="Dominio.Seguro"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +19,7 @@
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
         <a class="nav-item" href="AgregarSeguro.jsp">Agregar Seguros</a>
-        <a class="nav-item" href="ListarSeguros.jsp">Listar Seguros</a>
+        <a class="nav-item" href="ServletSeguro?accion=listar">Listar Seguros</a>
     </div>
 
 	<h2>Tipo de seguros en la base de datos</h2>
@@ -36,6 +38,11 @@
 	    <input type="submit" value="Filtrar">
 	</form>
 	
+	<%
+    	ArrayList<Seguro> listaSeguros = (ArrayList<Seguro>) request.getAttribute("listaSeguros");
+	%>
+	
+	
     <table>
         <thead>
             <tr>
@@ -46,15 +53,29 @@
                 <th>Costo Máximo Asegurado</th>
             </tr>
         </thead>
+        
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Es un seguro de salud para intervenciones quirúrgicas de alta complejidad, a un costo accesible.</td>
-                <td>Seguro de casas</td>
-                <td>600.0</td>
-                <td>15000.0</td>
-            </tr>
-        </tbody>
+		    <%
+		    if (listaSeguros != null) {
+		        for (Seguro s : listaSeguros) { 
+		    %>
+		        <tr>
+		            <td><%= s.getIdSeguro() %></td>
+		            <td><%= s.getDescripcion() %></td>
+		            <td><%= s.getDescripcionTipo() %></td>
+		            <td><%= s.getCostoContratacion() %></td>
+		            <td><%= s.getCostoAsegurado() %></td>
+		        </tr>
+		    <%  
+		        } 
+		    } else { 
+		    %>
+		        <tr>
+		            <td colspan="5">No hay seguros registrados o no se cargó la lista.</td>
+		        </tr>
+		    <% } %>
+		</tbody>		
+        
     </table>
 </div>
 </body>
