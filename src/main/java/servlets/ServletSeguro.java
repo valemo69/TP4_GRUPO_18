@@ -27,14 +27,30 @@ public class ServletSeguro extends HttpServlet {
         String accion = request.getParameter("accion");
         
         if ("listar".equals(accion)) {
-            SeguroDao dao = new SeguroDao();
-            ArrayList<Seguro> lista = dao.obtenerSeguros();
-            request.setAttribute("listaSeguros", lista);
+        	SeguroDao dao = new SeguroDao();
+        	String idTipoParam = request.getParameter("idTipo");
+        	request.setAttribute("idTipoSeleccionado", idTipoParam);
+        	ArrayList<Seguro> lista;
+
+        	if (idTipoParam != null && !idTipoParam.isEmpty()) {
+        	    int idTipo = Integer.parseInt(idTipoParam);
+        	    lista = dao.obtenerSegurosPorTipo(idTipo);
+
+        	} else {
+        	    lista = dao.obtenerSeguros();
+        	}
+
+        	request.setAttribute("listaSeguros", lista);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("/ListarSeguros.jsp");
             dispatcher.forward(request, response);
         } else {
-            // Comportamiento por defecto: ir a Agregar Seguros
+
+            SeguroDao dao = new SeguroDao();
+
+            request.setAttribute("proximoId", dao.obtenerProximoId());
+            request.setAttribute("tipos", dao.obtenerTipos());
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarSeguro.jsp");
             dispatcher.forward(request, response);
         }
@@ -70,7 +86,6 @@ public class ServletSeguro extends HttpServlet {
 		
 		// 5. REDIRIGIR LA VISTA
 		// Volvemos a cargar la página AgregarSeguro.jsp para que las cajitas queden en blanco
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarSeguro.jsp");
-		dispatcher.forward(request, response);
+		doGet(request, response);
 	}
 }

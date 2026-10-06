@@ -18,7 +18,7 @@
 
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
-        <a class="nav-item" href="AgregarSeguro.jsp">Agregar Seguros</a>
+        <a class="nav-item" href="ServletSeguro">Agregar Seguros</a>
         <a class="nav-item" href="ServletSeguro?accion=listar">Listar Seguros</a>
     </div>
 

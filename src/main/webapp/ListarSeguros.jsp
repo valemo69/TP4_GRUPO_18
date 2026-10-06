@@ -18,7 +18,7 @@
 <div class="container">
     <div>
         <a class="nav-item" href="Inicio.jsp">Inicio</a>
-        <a class="nav-item" href="AgregarSeguro.jsp">Agregar Seguros</a>
+        <a class="nav-item" href="ServletSeguro">Agregar Seguros</a>
         <a class="nav-item" href="ServletSeguro?accion=listar">Listar Seguros</a>
     </div>
 
@@ -29,11 +29,13 @@
 	<form action="ServletSeguro" method="get">
 	    Busqueda por tipo de seguros:
 	
+		<input type="hidden" name="accion" value="listar">
 	    <select name="idTipo">
-	        <option value="1">Seguro de casas</option>
-	        <option value="2">Seguro de vida</option>
-	        <option value="3">Seguro de motos</option>
-	    </select>
+		    <option value="">Todos</option>
+		    <option value="1">Seguro de casas</option>
+		    <option value="2">Seguro de vida</option>
+		    <option value="3">Seguro de motos</option>
+		</select>
 	
 	    <input type="submit" value="Filtrar">
 	</form>
