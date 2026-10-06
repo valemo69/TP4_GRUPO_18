@@ -1,4 +1,5 @@
 <%@page import="Dominio.Seguro"%>
+<%@page import="Dominio.TipoSeguro"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,9 +23,14 @@
         <a class="nav-item" href="ServletSeguro?accion=listar">Listar Seguros</a>
     </div>
 
-	<h2>Tipo de seguros en la base de datos</h2>
+	<h2>Listar seguros</h2>
 
 	<br>
+	
+	<%
+    	ArrayList<TipoSeguro> tipos = (ArrayList<TipoSeguro>) request.getAttribute("tipos");
+    	String idTipoSeleccionado = (String) request.getAttribute("idTipoSeleccionado");
+	%>
 	
 	<form action="ServletSeguro" method="get">
 	    Busqueda por tipo de seguros:
@@ -32,9 +38,13 @@
 		<input type="hidden" name="accion" value="listar">
 	    <select name="idTipo">
 		    <option value="">Todos</option>
-		    <option value="1">Seguro de casas</option>
-		    <option value="2">Seguro de vida</option>
-		    <option value="3">Seguro de motos</option>
+		    <% if (tipos != null) {
+		           for (TipoSeguro t : tipos) {
+		               String sel = (idTipoSeleccionado != null && idTipoSeleccionado.equals(String.valueOf(t.getIdTipo()))) ? "selected" : "";
+		    %>
+		        <option value="<%= t.getIdTipo() %>" <%= sel %>><%= t.getDescripcion() %></option>
+		    <%     }
+		       } %>
 		</select>
 	
 	    <input type="submit" value="Filtrar">

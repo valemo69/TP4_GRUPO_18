@@ -41,6 +41,7 @@ public class ServletSeguro extends HttpServlet {
         	}
 
         	request.setAttribute("listaSeguros", lista);
+            request.setAttribute("tipos", dao.obtenerTipos());
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("/ListarSeguros.jsp");
             dispatcher.forward(request, response);

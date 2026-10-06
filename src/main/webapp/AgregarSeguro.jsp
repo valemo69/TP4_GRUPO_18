@@ -27,7 +27,12 @@
     <form action="ServletSeguro" method="post">
 
         <table>
-            
+            <tr>
+                <td>ID Seguro:</td>
+                <td>
+                    <input type="text" name="idSeguro" value="<%= request.getAttribute("proximoId") %>" readonly>
+                </td>
+            </tr>
 
             <tr>
                 <td>Descripción:</td>
